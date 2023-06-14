@@ -21,7 +21,7 @@ BASE_URL = https://frameextractor.example.com/
 ```
 
 This should point to
-(catflow-frameextractor)[https://github.com/iank/catflow-frameextractor].
+[catflow-frameextractor](https://github.com/iank/catflow-frameextractor).
 
 Then run export.py:
 
