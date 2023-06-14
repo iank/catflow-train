@@ -161,3 +161,7 @@ cython_debug/
 
 /frameextractor.ini
 /download
+/data
+/bod.yaml
+/yolov5
+/yolov5m.pt
