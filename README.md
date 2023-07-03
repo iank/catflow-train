@@ -39,13 +39,15 @@ names: ['cat', 'dog', 'human']
 First, write frameextractor.ini, for example:
 
 ```
-[FrameExtractor]
-SECRET_TOKEN = XXXXXXXX
-BASE_URL = https://frameextractor.example.com/
-```
+[S3]
+BUCKET_NAME = example
+ENDPOINT_URL = https://s3.us-east-1.example.com
 
-This should point to
-[catflow-frameextractor](https://github.com/iank/catflow-frameextractor).
+[LabelStudioAPI]
+BASE_URL = https://example.com
+AUTH_TOKEN = xxxxxxxxxxxxxxxxxxxx
+PROJECT_ID = 1
+```
 
 Then run export.py:
 
@@ -58,7 +60,7 @@ Extract the zip in `download/` and check download/notes.json against your yaml f
 Download missing images and split the dataset (delete the `data/` directory first if this is a re-run):
 
 ```
-python split_data.py
+python split_data.py download/<export name>.json
 ```
 
 # Train:
