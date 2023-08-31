@@ -23,7 +23,7 @@ def get_filenames(folder):
 
     return filenames
 
-def download_images(endpoint_url, bucket_name, image_filenames):
+def download_images(endpoint_url, image_filenames):
     session = requests.Session()
 
     total_images = len(image_filenames)
@@ -31,7 +31,7 @@ def download_images(endpoint_url, bucket_name, image_filenames):
 
     logger.info("Downloading missing images:")
     for idx,image_filename in enumerate(image_filenames):
-        url = f'{endpoint_url}/{bucket_name}/{image_filename}'
+        url = f'{endpoint_url}/{image_filename}'
         destination = f'download/images/{image_filename}'
         if not os.path.isfile(destination):
             try:
@@ -76,7 +76,6 @@ config = configparser.ConfigParser()
 config.read('frameextractor.ini')
 
 ENDPOINT_URL = config['S3']['ENDPOINT_URL']
-BUCKET_NAME = config['S3']['BUCKET_NAME']
 
 if len(sys.argv) != 2:
     print('Usage: python split_data.py downloads/<json-file>')
@@ -92,7 +91,7 @@ label_filenames = np.array(list(label_filenames))
 
 # Check and download missing images
 image_filenames = [filename.replace('.txt', '.png') for filename in label_filenames]
-download_images(ENDPOINT_URL, BUCKET_NAME, image_filenames)
+download_images(ENDPOINT_URL, image_filenames)
 
 # Fetch source per uuid
 uuids = set([filename.replace('.txt', '') for filename in label_filenames])
